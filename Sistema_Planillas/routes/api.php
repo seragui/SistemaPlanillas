@@ -5,11 +5,25 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfesionController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\EstadoCivilController;
+use App\Http\Controllers\AuthController;
 use App\Models\EstadoCivil;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+// Route::get('/user', function (Request $request) {
+//     return $request->user();
+// })->middleware('auth:sanctum');
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
+    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
+    Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+    Route::post('/password_reset', [AuthController::class, 'resetPassword'])->middleware('auth:api')->name('password.reset');
+});
 
 Route::apiResource('/profesiones', ProfesionController::class);
 Route::get('/profesiones/{profesion}', 'ProfesionController@show');
