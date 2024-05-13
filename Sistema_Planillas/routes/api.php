@@ -6,8 +6,9 @@ use App\Http\Controllers\ProfesionController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\EstadoCivilController;
 use App\Http\Controllers\AuthController;
-use App\Models\EstadoCivil;
-
+use App\Http\Controllers\DepartamentoController;
+use App\Http\Controllers\MunicipioController;
+use App\Http\Controllers\PaisController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -39,3 +40,26 @@ Route::put('/estados_civiles/{id}', [EstadoCivilController::class, 'update']);
 Route::patch('/estados_civiles/{id}', [EstadoCivilController::class, 'update']);
 Route::delete('/estados_civiles/{id}', [EstadoCivilController::class, 'destroy']);
 
+//Rutas para pais
+Route::get('/pais', [PaisController::class, 'index']);
+Route::get('/pais/{pais}', [PaisController::class, 'show']);
+Route::post('/pais', [PaisController::class, 'store']);
+Route::put('/pais/{id}', [PaisController::class, 'update']);
+Route::patch('/pais/{id}', [PaisController::class, 'update']);
+Route::delete('/pais/{id}', [PaisController::class, 'destroy']);
+
+//Rutas para departamento
+Route::get('/departamento', [DepartamentoController::class, 'index']);
+Route::get('/departamento/{departamento}', [DepartamentoController::class, 'show']);
+Route::post('/departamento', [DepartamentoController::class, 'store']);
+Route::put('/departamento/{id}', [DepartamentoController::class, 'update']);
+Route::patch('/departamento/{id}', [DepartamentoController::class, 'update']);
+Route::delete('/departamento/{id}', [DepartamentoController::class, 'destroy']);
+
+//Rutas para departamento
+Route::get('/municipio', [MunicipioController::class, 'index']);
+Route::get('/municipio/{municipio}', [MunicipioController::class, 'show']);
+Route::post('/municipio', [MunicipioController::class, 'store']);
+Route::put('/municipio/{id}', [MunicipioController::class, 'update']);
+Route::patch('/municipio/{id}', [MunicipioController::class, 'update']);
+Route::delete('/municipio/{id}', [MunicipioController::class, 'destroy']);
