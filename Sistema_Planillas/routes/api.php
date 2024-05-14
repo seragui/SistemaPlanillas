@@ -6,6 +6,10 @@ use App\Http\Controllers\ProfesionController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\EstadoCivilController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
+use App\Models\EstadoCivil;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PaisController;
@@ -24,6 +28,11 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
     Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
     Route::post('/password_reset', [AuthController::class, 'resetPassword'])->middleware('auth:api')->name('password.reset');
+});
+
+Route::group(['middleware' => ['auth:']], function(){
+    Route::resource('roles', RolController::class);
+    Route::resource('usuarios', UsuarioController::class);
 });
 
 Route::apiResource('/profesiones', ProfesionController::class);
