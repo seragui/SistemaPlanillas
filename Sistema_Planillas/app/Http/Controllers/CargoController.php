@@ -13,6 +13,9 @@ class CargoController extends Controller
     public function index()
     {
         $cargos = Cargo::all();
+        if ($cargos->isEmpty()) {
+            return response()->json(['mensaje' => 'Sin registros ingresados'], 404);
+        }
         return response()->json($cargos);
     }
 
@@ -22,7 +25,9 @@ class CargoController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            // Validación de los datos
+            'cargo_descripcion' => 'required|string|max:150',
+            'salario_maximo' => 'required|numeric',
+            'salario_minimo' => 'required|numeric'
         ]);
 
         $cargo = Cargo::create($validatedData);
@@ -32,9 +37,9 @@ class CargoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id_cargo)
     {
-        $cargo = Cargo::findOrFail($id);
+        $cargo = Cargo::find($id_cargo);
         return response()->json($cargo);
     }
 

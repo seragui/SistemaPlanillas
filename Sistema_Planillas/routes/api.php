@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfesionController;
 use App\Http\Controllers\TipoDocumentoController;
 use App\Http\Controllers\EstadoCivilController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CargoController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PaisController;
@@ -63,3 +64,11 @@ Route::post('/municipio', [MunicipioController::class, 'store']);
 Route::put('/municipio/{id}', [MunicipioController::class, 'update']);
 Route::patch('/municipio/{id}', [MunicipioController::class, 'update']);
 Route::delete('/municipio/{id}', [MunicipioController::class, 'destroy']);
+
+//Rutas para cargos
+Route::get('/cargo', [CargoController::class, 'index']);
+Route::get('/cargo/{cargo}', [CargoController::class, 'show']);
+Route::post('/cargo', [CargoController::class, 'store']);
+Route::put('/cargo/{id}', [CargoController::class, 'update']);
+Route::patch('/cargo/{id}', [CargoController::class, 'update']);
+Route::delete('/cargo/{id}', [CargoController::class, 'destroy']);
