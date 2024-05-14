@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dda654fb3a4e9d13705a439f7d6957a",
+    "content-hash": "b43d14c34a423ec6e79271ecc4880873",
     "packages": [
         {
             "name": "brick/math",
@@ -1052,16 +1052,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v11.6.0",
+            "version": "v11.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e090ee638ebd4ce221d8bad43b49bbf59ea70ae5"
+                "reference": "e5ac72f513f635f208024aa76b8a04efc1b47f93"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e090ee638ebd4ce221d8bad43b49bbf59ea70ae5",
-                "reference": "e090ee638ebd4ce221d8bad43b49bbf59ea70ae5",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/e5ac72f513f635f208024aa76b8a04efc1b47f93",
+                "reference": "e5ac72f513f635f208024aa76b8a04efc1b47f93",
                 "shasum": ""
             },
             "require": {
@@ -1253,7 +1253,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2024-04-30T13:30:08+00:00"
+            "time": "2024-05-07T13:41:51+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -2975,20 +2975,20 @@
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35"
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
-                "reference": "e616d01114759c4c489f93b099585439f795fe35",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
+                "reference": "2b4765fddfe3b508ac62f829e852b1501d3f6e8a",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0.0",
+                "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
@@ -3012,7 +3012,7 @@
                     "homepage": "https://www.php-fig.org/"
                 }
             ],
-            "description": "Common interfaces for PSR-7 HTTP message factories",
+            "description": "PSR-17: Common interfaces for PSR-7 HTTP message factories",
             "keywords": [
                 "factory",
                 "http",
@@ -3024,9 +3024,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
+                "source": "https://github.com/php-fig/http-factory"
             },
-            "time": "2023-04-10T20:10:41+00:00"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
@@ -3487,34 +3487,49 @@
             "time": "2024-04-27T21:32:50+00:00"
         },
         {
-            "name": "respect/stringifier",
-            "version": "0.2.0",
+            "name": "spatie/laravel-permission",
+            "version": "6.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Respect/Stringifier.git",
-                "reference": "e55af3c8aeaeaa2abb5fa47a58a8e9688cc23b59"
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "17607924aa0aa89bc0153c2ce45ed7c55083367b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Stringifier/zipball/e55af3c8aeaeaa2abb5fa47a58a8e9688cc23b59",
-                "reference": "e55af3c8aeaeaa2abb5fa47a58a8e9688cc23b59",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/17607924aa0aa89bc0153c2ce45ed7c55083367b",
+                "reference": "17607924aa0aa89bc0153c2ce45ed7c55083367b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "illuminate/auth": "^8.12|^9.0|^10.0|^11.0",
+                "illuminate/container": "^8.12|^9.0|^10.0|^11.0",
+                "illuminate/contracts": "^8.12|^9.0|^10.0|^11.0",
+                "illuminate/database": "^8.12|^9.0|^10.0|^11.0",
+                "php": "^8.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.8",
-                "malukenho/docheader": "^0.1.7",
-                "phpunit/phpunit": "^6.4"
+                "laravel/passport": "^11.0|^12.0",
+                "orchestra/testbench": "^6.23|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.4|^10.1"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "6.x-dev",
+                    "dev-master": "6.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
             "autoload": {
                 "files": [
-                    "src/stringify.php"
+                    "src/helpers.php"
                 ],
                 "psr-4": {
-                    "Respect\\Stringifier\\": "src/"
+                    "Spatie\\Permission\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3523,90 +3538,35 @@
             ],
             "authors": [
                 {
-                    "name": "Respect/Stringifier Contributors",
-                    "homepage": "https://github.com/Respect/Stringifier/graphs/contributors"
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
                 }
             ],
-            "description": "Converts any value to a string",
-            "homepage": "http://respect.github.io/Stringifier/",
+            "description": "Permission handling for Laravel 8.0 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
             "keywords": [
-                "respect",
-                "stringifier",
-                "stringify"
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
             ],
             "support": {
-                "issues": "https://github.com/Respect/Stringifier/issues",
-                "source": "https://github.com/Respect/Stringifier/tree/0.2.0"
+                "issues": "https://github.com/spatie/laravel-permission/issues",
+                "source": "https://github.com/spatie/laravel-permission/tree/6.7.0"
             },
-            "time": "2017-12-29T19:39:25+00:00"
-        },
-        {
-            "name": "respect/validation",
-            "version": "2.3.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Respect/Validation.git",
-                "reference": "967f7b6cc71e3728bb0f766cc1aea0604b2955aa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Respect/Validation/zipball/967f7b6cc71e3728bb0f766cc1aea0604b2955aa",
-                "reference": "967f7b6cc71e3728bb0f766cc1aea0604b2955aa",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^8.1 || ^8.2",
-                "respect/stringifier": "^0.2.0",
-                "symfony/polyfill-mbstring": "^1.2"
-            },
-            "require-dev": {
-                "egulias/email-validator": "^3.0",
-                "giggsey/libphonenumber-for-php-lite": "^8.13",
-                "malukenho/docheader": "^1.0",
-                "mikey179/vfsstream": "^1.6",
-                "phpstan/phpstan": "^1.9",
-                "phpstan/phpstan-deprecation-rules": "^1.1",
-                "phpstan/phpstan-phpunit": "^1.3",
-                "phpunit/phpunit": "^9.6",
-                "psr/http-message": "^1.0",
-                "respect/coding-standard": "^4.0",
-                "squizlabs/php_codesniffer": "^3.7"
-            },
-            "suggest": {
-                "egulias/email-validator": "Improves the Email rule if available",
-                "ext-bcmath": "Arbitrary Precision Mathematics",
-                "ext-fileinfo": "File Information",
-                "ext-mbstring": "Multibyte String Functions",
-                "giggsey/libphonenumber-for-php-lite": "Enables the phone rule if available"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Respect\\Validation\\": "library/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
+            "funding": [
                 {
-                    "name": "Respect/Validation Contributors",
-                    "homepage": "https://github.com/Respect/Validation/graphs/contributors"
+                    "url": "https://github.com/spatie",
+                    "type": "github"
                 }
             ],
-            "description": "The most awesome validation engine ever created for PHP",
-            "homepage": "http://respect.github.io/Validation/",
-            "keywords": [
-                "respect",
-                "validation",
-                "validator"
-            ],
-            "support": {
-                "issues": "https://github.com/Respect/Validation/issues",
-                "source": "https://github.com/Respect/Validation/tree/2.3.7"
-            },
-            "time": "2024-04-13T09:45:55+00:00"
+            "time": "2024-04-19T12:35:28+00:00"
         },
         {
             "name": "stella-maris/clock",
