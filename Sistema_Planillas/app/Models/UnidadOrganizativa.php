@@ -10,7 +10,7 @@ class UnidadOrganizativa extends Model
     protected $table = 'unidades_organizativas';
     protected $primaryKey = 'codigo_unidad';
 
-    protected $fillable = ['codigo_organizacion', 'nombre_unidad', 'codigo_estructura'];
+    protected $fillable = ['codigo_organizacion', 'nombre_unidad', 'codigo_estructura','centro_costos'];
 
     public function organizacion()
     {
