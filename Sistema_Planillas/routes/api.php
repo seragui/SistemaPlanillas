@@ -11,6 +11,9 @@ use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PaisController;
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\OrganizacionController;
+use App\Http\Controllers\UnidadOrganizativaController;
+use App\Http\Controllers\PresupuestoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -77,6 +80,35 @@ Route::patch('/cargo/{id}', [CargoController::class, 'update']);
 Route::delete('/cargo/{id}', [CargoController::class, 'destroy']);
 
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles', RolController::class);
-});
+//Rutas para cargos
+Route::get('/cargo', [CargoController::class, 'index']);
+Route::get('/cargo/{cargo}', [CargoController::class, 'show']);
+Route::post('/cargo', [CargoController::class, 'store']);
+Route::put('/cargo/{id}', [CargoController::class, 'update']);
+Route::patch('/cargo/{id}', [CargoController::class, 'update']);
+Route::delete('/cargo/{id}', [CargoController::class, 'destroy']);
+
+
+//Rutas para organizacion
+Route::get('/organizacion', [OrganizacionController::class, 'index']);
+Route::get('/organizacion/{organizacion}', [OrganizacionController::class, 'show']);
+Route::post('/organizacion', [OrganizacionController::class, 'store']);
+Route::put('/organizacion/{id}', [OrganizacionController::class, 'update']);
+Route::patch('/organizacion/{id}', [OrganizacionController::class, 'update']);
+Route::delete('/organizacion/{id}', [OrganizacionController::class, 'destroy']);
+
+//Rutas para organizacion
+Route::get('/unidad', [UnidadOrganizativaController::class, 'index']);
+Route::get('/unidad/{unidad}', [UnidadOrganizativaController::class, 'show']);
+Route::post('/unidad', [UnidadOrganizativaController::class, 'store']);
+Route::put('/unidad/{id}', [UnidadOrganizativaController::class, 'update']);
+Route::patch('/unidad/{id}', [UnidadOrganizativaController::class, 'update']);
+Route::delete('/unidad/{id}', [UnidadOrganizativaController::class, 'destroy']);
+
+//Rutas para presupuesto
+Route::get('/presupuesto_unidad', [PresupuestoController::class, 'index']);
+Route::get('/presupuesto_unidad/{unidad}', [PresupuestoController::class, 'show']);
+Route::post('/presupuesto_unidad', [PresupuestoController::class, 'store']);
+Route::put('/presupuesto_unidad/{id}', [PresupuestoController::class, 'update']);
+Route::patch('/presupuesto_unidad/{id}', [PresupuestoController::class, 'update']);
+Route::delete('/presupuesto_unidad/{id}', [PresupuestoController::class, 'destroy']);
