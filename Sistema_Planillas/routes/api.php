@@ -10,22 +10,25 @@ use App\Http\Controllers\CargoController;
 use App\Http\Controllers\DepartamentoController;
 use App\Http\Controllers\MunicipioController;
 use App\Http\Controllers\PaisController;
+use App\Http\Controllers\RolController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
-    Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
-    Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
-    Route::post('/password_reset', [AuthController::class, 'resetPassword'])->middleware('auth:api')->name('password.reset');
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/refresh', [AuthController::class, 'refresh'])->name('refresh');
+        Route::post('/me', [AuthController::class, 'me'])->middleware('role:Administrador')->name('me');
+        Route::post('/password_reset', [AuthController::class, 'resetPassword'])->name('password.reset');
+    });
 });
+
 
 Route::apiResource('/profesiones', ProfesionController::class);
 Route::get('/profesiones/{profesion}', 'ProfesionController@show');
@@ -72,3 +75,8 @@ Route::post('/cargo', [CargoController::class, 'store']);
 Route::put('/cargo/{id}', [CargoController::class, 'update']);
 Route::patch('/cargo/{id}', [CargoController::class, 'update']);
 Route::delete('/cargo/{id}', [CargoController::class, 'destroy']);
+
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RolController::class);
+});

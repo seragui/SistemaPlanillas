@@ -6,15 +6,11 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RolController extends Controller
 {
-    function __construct(){
-        $this->middleware('permission:ver-rol | crear-rol | editar-rol | borrar-rol',['only'=>['index']]);
-        $this->middleware('permission:crear-rol',['only'=>['create','store']]);
-        $this->middleware('permission:editar-rol',['only'=>['edit','update']]);
-        $this->middleware('permission:borrar-rol',['only'=>['destroy']]);
-    }
+   
     /**
      * Display a listing of the resource.
      */
@@ -42,15 +38,34 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name' => 'required', 'permission' => 'required']);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'permission' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'Error de validación',
+                'errors' => $validator->errors(),
+                'status' => 422
+            ];
+            return response()->json($data, 422);
+        }
+    
+        // Crear el rol
         $role = Role::create(['name' => $request->name]);
-        $role->syncPermissions($request->permission);
-
+    
+        // Obtener los IDs de los permisos
+        $permissionIds = Permission::whereIn('name', $request->permission)->pluck('id')->toArray();
+    
+        // Asignar los permisos al rol
+        $role->syncPermissions($permissionIds);
+    
         $data=[
             'message'=>'Rol creado con éxito',
             'status'=>201
         ];
-
+    
         return response()->json($data, 201);
     }
 
@@ -88,19 +103,30 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, ['name' => 'required', 'permission' => 'required']);
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'permission' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
         $role = Role::find($id);
         $role->name = $request->name;
         $role->save();
-        $role->syncPermissions($request->permission);
+        $permissionIds = Permission::whereIn('name', $request->permission)->pluck('id')->toArray();
+        // Asignar los permisos al rol
+        $role->syncPermissions($permissionIds);
 
-        $data=[
-            'message'=>'Rol actualizado con éxito',
-            'status'=>200
+        $data = [
+            'message' => 'Rol actualizado con éxito',
+            'status' => 200
         ];
 
         return response()->json($data, 200);
     }
+
 
     /**
      * Remove the specified resource from storage.
