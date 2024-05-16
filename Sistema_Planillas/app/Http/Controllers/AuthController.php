@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-  
+use Spatie\Permission\Models\Role;
+use Tymon\JWTAuth\Facades\JWTAuth;
   
 class AuthController extends Controller
 {
@@ -22,12 +23,14 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => [
-            'required',
-            'string',
-            'min:8',
-            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
+                'required',
+                'string',
+                'min:8',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/',
             ],
+            'role' => 'required|int',
         ]);
+        
   
         if($validator->fails()){
             return response()->json($validator->errors()->toJson(), 400);
@@ -37,6 +40,13 @@ class AuthController extends Controller
         $user->name = request()->name;
         $user->email = request()->email;
         $user->password = bcrypt(request()->password);
+        $role = Role::where('id', request()->role)->first();
+
+        if (!$role) {
+            return response()->json(['error' => 'El rol especificado no existe'], 400);
+        }
+
+        $user->assignRole($role);
         $user->save();
   
         return response()->json([
@@ -44,6 +54,7 @@ class AuthController extends Controller
             'user' => $user
         ], 201);
     }
+
   
   
     /**
@@ -51,8 +62,17 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login()
+    public function login(Request $request)
     {
+
+        $validate = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        if ($validate->fails()) {
+            return response()->json(['error' => 'Datos incompletos'], 400);
+        }
+
         $credentials = request(['email', 'password']);
 
         $user = User::where('email', $credentials['email'])->first();
@@ -79,7 +99,16 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        $user = auth()->user();
+
+        // roles
+        $roles = $user->getRoleNames();
+
+        return response()->json([
+            'name' => $user->name,
+            'email' => $user->email,
+            'roles' => $roles
+        ]);
     }
   
     /**
@@ -101,7 +130,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        //return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth()->refresh());
     }
   
     /**
@@ -116,7 +145,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            //'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' => auth()->factory()->getTTL() * 60
         ]);
     }
 
