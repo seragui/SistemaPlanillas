@@ -39,35 +39,51 @@ class RolController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'permission' => 'required',
+            'name' => 'required|string|max:255',
+            'permission' => 'required|array',
+            'permission.*' => 'string|exists:permissions,name',
         ]);
     
         if ($validator->fails()) {
-            $data = [
+            return response()->json([
                 'message' => 'Error de validación',
                 'errors' => $validator->errors(),
                 'status' => 422
-            ];
-            return response()->json($data, 422);
+            ], 422);
         }
     
-        // Crear el rol
-        $role = Role::create(['name' => $request->name]);
+        // Verificar si el rol ya existe
+        $existingRole = Role::where('name', $request->name)->where('guard_name', 'api')->first();
+        if ($existingRole) {
+            return response()->json([
+                'message' => 'El rol ya existe',
+                'status' => 400
+            ], 400);
+        }
+    
+        // Crear el rol con el guard 'api'
+        $role = Role::create(['name' => $request->name, 'guard_name' => 'api']);
     
         // Obtener los IDs de los permisos
         $permissionIds = Permission::whereIn('name', $request->permission)->pluck('id')->toArray();
     
+        if (empty($permissionIds)) {
+            return response()->json([
+                'message' => 'Permisos no encontrados',
+                'status' => 404
+            ], 404);
+        }
+    
         // Asignar los permisos al rol
         $role->syncPermissions($permissionIds);
     
-        $data=[
-            'message'=>'Rol creado con éxito',
-            'status'=>201
-        ];
-    
-        return response()->json($data, 201);
+        return response()->json([
+            'message' => 'Rol creado con éxito',
+            'status' => 201
+        ], 201);
     }
+    
+
 
     /**
      * Display the specified resource.
