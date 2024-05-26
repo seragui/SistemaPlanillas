@@ -14,6 +14,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\OrganizacionController;
 use App\Http\Controllers\UnidadOrganizativaController;
 use App\Http\Controllers\PresupuestoController;
+use App\Http\Controllers\TipoDescuentoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -124,5 +125,13 @@ Route::group(['middleware' => ['auth:api', 'role:Administrador']], function() {
     Route::delete('/rol/{id}', [RolController::class, 'destroy']);
 
 });
+
+//rutas para TipoDescuento
+Route::get('/tipo_descuento', [TipoDescuentoController::class, 'index']);
+Route::get('/tipo_descuento/{id}', [TipoDescuentoController::class, 'show']);
+Route::post('/tipo_descuento', [TipoDescuentoController::class, 'store']);
+Route::put('/tipo_descuento/{id}', [TipoDescuentoController::class, 'update']);
+Route::patch('/tipo_descuento/{id}', [TipoDescuentoController::class, 'update']);
+Route::delete('/tipo_descuento/{id}', [TipoDescuentoController::class, 'destroy']);
 
 
