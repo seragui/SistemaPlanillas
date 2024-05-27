@@ -49,7 +49,9 @@ class CargoController extends Controller
     public function update(Request $request, string $id)
     {
         $validatedData = $request->validate([
-            // Validación de los datos
+            'cargo_descripcion' => 'required|string|max:150',
+            'salario_maximo' => 'required|numeric',
+            'salario_minimo' => 'required|numeric'
         ]);
 
         $cargo = Cargo::findOrFail($id);
