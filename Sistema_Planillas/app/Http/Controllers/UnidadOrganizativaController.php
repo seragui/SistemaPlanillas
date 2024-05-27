@@ -24,7 +24,8 @@ class UnidadOrganizativaController extends Controller
         $request->validate([
             'codigo_organizacion' => 'required|exists:organizaciones,codigo_organizacion',
             'nombre_unidad' => 'required|max:100',
-            'codigo_estructura' => 'nullable|exists:unidades_organizativas,codigo_unidad'
+            'codigo_estructura' => 'nullable|exists:unidades_organizativas,codigo_unidad',
+            'centro_costos' => 'required|max:100',
         ]);
 
         $unidad = UnidadOrganizativa::create($request->all());
@@ -46,8 +47,10 @@ class UnidadOrganizativaController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
+            'codigo_organizacion' => 'required|exists:organizaciones,codigo_organizacion',
             'nombre_unidad' => 'required|max:100',
-            'codigo_estructura' => 'nullable|exists:unidades_organizativas,codigo_unidad'
+            'codigo_estructura' => 'nullable|exists:unidades_organizativas,codigo_unidad',
+            'centro_costos' => 'required|max:100',
         ]);
 
         $unidad = UnidadOrganizativa::findOrFail($id);
