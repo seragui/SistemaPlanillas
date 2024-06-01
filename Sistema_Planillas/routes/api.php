@@ -15,9 +15,11 @@ use App\Http\Controllers\OrganizacionController;
 use App\Http\Controllers\UnidadOrganizativaController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\TipoDescuentoController;
+use App\Http\Controllers\TipoIngresoController;
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\ProfesionController;
-use App\Models\TipoDocumento;
+use App\Http\Controllers\EmpleadoDescuentoController;
+use App\Http\Controllers\EmpleadoIngresoController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -99,7 +101,13 @@ Route::group(['middleware' => ['auth:api', 'role:Administrador']], function() {
     Route::patch('/municipio/{id}', [MunicipioController::class, 'update']);
     Route::delete('/municipio/{id}', [MunicipioController::class, 'destroy']);
 
-
+    //rutas para TipoDescuento
+    Route::get('/tipo_ingreso', [TipoIngresoController::class, 'index']);
+    Route::get('/tipo_ingreso/{id}', [TipoIngresoController::class, 'show']);
+    Route::post('/tipo_ingreso', [TipoIngresoController::class, 'store']);
+    Route::put('/tipo_ingreso/{id}', [TipoIngresoController::class, 'update']);
+    Route::patch('/tipo_ingreso/{id}', [TipoIngresoController::class, 'update']);
+    Route::delete('/tipo_ingreso/{id}', [TipoIngresoController::class, 'destroy']);
 
     //rutas para TipoDescuento
     Route::get('/tipo_descuento', [TipoDescuentoController::class, 'index']);
@@ -154,8 +162,23 @@ Route::group(['middleware' => ['auth:api', 'role:Administrador']], function() {
     Route::get('/tipo_documento', [TipoDocumentoController::class, 'index']);
     Route::get('/tipo_documento/{id}', [TipoDocumentoController::class, 'show']);
     Route::post('/tipo_documento', [TipoDocumentoController::class, 'store']);
-    Route::put('/tipo_documento{id}', [TipoDocumentoController::class, 'update']);
+    Route::put('/tipo_documento/{id}', [TipoDocumentoController::class, 'update']);
     Route::patch('/tipo_documento/{id}', [TipoDocumentoController::class, 'update']);
     Route::delete('/tipo_documento/{id}', [TipoDocumentoController::class, 'destroy']);
 
+    //Rutas para Empleado Descuento
+    Route::get('/empleado_descuento', [EmpleadoDescuentoController::class, 'index']);
+    Route::get('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'show']);
+    Route::post('/empleado_descuento', [EmpleadoDescuentoController::class, 'store']);
+    Route::put('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'update']);
+    Route::patch('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'update']);
+    Route::delete('/empleado_descuento/{id}', [EmpleadoDescuentoController::class, 'destroy']);
+
+    //Rutas para Empleado Descuento
+    Route::get('/empleado_ingreso', [EmpleadoIngresoController::class, 'index']);
+    Route::get('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'show']);
+    Route::post('/empleado_ingreso', [EmpleadoIngresoController::class, 'store']);
+    Route::put('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'update']);
+    Route::patch('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'update']);
+    Route::delete('/empleado_ingreso/{id}', [EmpleadoIngresoController::class, 'destroy']);
 
