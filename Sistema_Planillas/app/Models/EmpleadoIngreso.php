@@ -16,7 +16,8 @@ class EmpleadoIngreso extends Model
         'codigo_empleado',
         'tipo_ingreso_id',
         'monto',
-        'fecha'
+        'fecha_inicio',
+        'fecha_fin'
     ];
 
     public function empleado()

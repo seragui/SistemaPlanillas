@@ -34,7 +34,8 @@ class EmpleadoIngresoController extends Controller
             'codigo_empleado' => 'required|exists:empleados,codigo_empleado',
             'tipo_ingreso_id' => 'required|exists:tipo_ingresos,id_ingreso',
             'monto' => 'required|numeric|min:0',
-            'fecha' => 'required|date',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
         ]);
 
         $empleadoIngreso = EmpleadoIngreso::create($validated);
@@ -73,7 +74,8 @@ class EmpleadoIngresoController extends Controller
             'codigo_empleado' => 'required|exists:empleados,codigo_empleado',
             'tipo_ingreso_id' => 'required|exists:tipo_ingresos,id_ingreso',
             'monto' => 'required|numeric|min:0',
-            'fecha' => 'required|date',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
         ]);
 
         $empleadoIngreso->update($validatedData);

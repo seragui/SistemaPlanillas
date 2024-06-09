@@ -16,7 +16,8 @@ class EmpleadoDescuento extends Model
         'codigo_empleado',
         'tipo_descuento_id',
         'monto',
-        'fecha_inicio'
+        'fecha_inicio',
+        'fecha_fin'
     ];
 
     public function empleado()

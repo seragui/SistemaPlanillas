@@ -34,6 +34,7 @@ class EmpleadoDescuentoController extends Controller
             'tipo_descuento_id' => 'required|exists:tipo_descuentos,id_descuento',
             'monto' => 'required|numeric|min:0',
             'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date'
         ]);
 
         $empleadoDescuento = EmpleadoDescuento::create($validated);
@@ -73,6 +74,7 @@ class EmpleadoDescuentoController extends Controller
             'tipo_descuento_id' => 'required|exists:tipos_descuento,id',
             'monto' => 'required|numeric|min:0',
             'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date'
         ]);
 
         $empleadoDescuento->update($validatedData);
